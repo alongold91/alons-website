@@ -1,0 +1,17 @@
+.nav {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-large);
+    background:
+    linear-gradient(90deg, rgba(163,0,244,1) 0%, rgba(60,4,112,0.8239670868347339) 100%, rgba(252,176,69,1) 100%);
+    color: var(--color-textLight);
+    font-weight: var(--fonts-smeiBold);
+    box-shadow: var(--shadows-shadow3);
+  }
+
+  .ul {
+    display: flex;
+    gap: 1.875rem;
+  }
