@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import style from './page.module.css';
-import Navbar from './ui/Navbar';
+import Navbar from './components/nav-bar/Navbar';
 
 export const metadata: Metadata = {
   title: 'Alon`s website',
