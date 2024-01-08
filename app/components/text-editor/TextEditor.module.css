@@ -20,6 +20,11 @@
   list-style-type: disc;
 }
 
+.tiptap {
+  min-height: 9.375rem;
+  border: 1px solid var(--color-borderColor);
+}
+
 .tiptap > * + * {
   margin-top: 0.75em;
 }
