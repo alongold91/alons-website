@@ -5,9 +5,13 @@ import {
   Header3Icon,
   ImageIcon,
   HighlighterIcon,
-  ItalicIcon
+  ItalicIcon,
+  CodeIcon,
+  UnderlineIcon,
+  BulletlistIcon
 } from '@/public/icons';
 import Highlight from '@tiptap/extension-highlight';
+import Underline from '@tiptap/extension-underline';
 import Image from '@tiptap/extension-image';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -17,13 +21,28 @@ import style from './TextEditor.module.css';
 
 const Tiptap = () => {
   const editor = useEditor({
-    extensions: [StarterKit.configure({
-      codeBlock: {
-        HTMLAttributes: {
-          class: style.code,
-        }
+    editorProps: {
+      attributes: {
+        class: style.tiptap
       }
-    }), Highlight, Image]
+    },
+    extensions: [
+      StarterKit.configure({
+        codeBlock: {
+          HTMLAttributes: {
+            class: style.code
+          },
+        },
+        bulletList: {
+          HTMLAttributes: {
+            class: style['bullet-list']
+          }
+        }
+      }),
+      Highlight,
+      Image,
+      Underline,
+    ]
     // onUpdate: (e) => console.log(editor?.getJSON())
     // content: '<p>Hello World! 🌎️</p>',
   });
@@ -41,10 +60,10 @@ const Tiptap = () => {
   }
 
   return (
-    <>
-      <div style={{ display: 'flex', marginTop: '1rem' }}>
-        <IconToggler isActive={false} onClick={addImage}>
-          <ImageIcon style={{ fontSize: '1.5rem' }} />
+    <div>
+      <div className={style['button-container']}>
+        <IconToggler onClick={addImage}>
+          <ImageIcon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('heading', { level: 2 })}
@@ -52,44 +71,63 @@ const Tiptap = () => {
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
         >
-          <Header2Icon style={{ fontSize: '1.5rem' }} />
+          <Header2Icon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('heading', { level: 3 })}
           onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
+            editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
         >
-          <Header3Icon style={{ fontSize: '1.5rem' }} />
+          <Header3Icon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('bold')}
           onClick={() => editor.chain().focus().toggleBold().run()}
         >
-          <BoldIcon style={{ fontSize: '1.5rem' }} />
+          <BoldIcon  />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('italic')}
           onClick={() => editor.chain().focus().toggleItalic().run()}
         >
-          <ItalicIcon style={{ fontSize: '1.5rem' }} />
+          <ItalicIcon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('highlight')}
           onClick={() => editor.chain().focus().toggleHighlight().run()}
         >
-          <HighlighterIcon style={{ fontSize: '1.5rem' }} />
+          <HighlighterIcon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('code')}
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         >
-          <p>Code</p>
+          <CodeIcon />
         </IconToggler>
-          
+        <IconToggler
+          isActive={editor.isActive('underline')}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+        >
+          <UnderlineIcon />
+        </IconToggler>
+        <IconToggler
+          isActive={editor.isActive('bulletList')}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+        >
+          <BulletlistIcon />
+        </IconToggler>
+        <IconToggler
+          isActive={false}
+          disabled={!editor.can().liftListItem('listItem')}
+          onClick={() => editor.chain().focus().liftListItem('listItem').run()}
+        >
+          Lift li
+        </IconToggler>
+
       </div>
       <EditorContent editor={editor} />
-    </>
+    </div>
   );
 };
 

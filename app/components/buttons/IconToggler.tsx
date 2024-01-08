@@ -5,11 +5,12 @@ import style from './buttons.module.css';
 
 interface IconTogglerProps {
   children: React.ReactNode;
-  isActive: boolean
+  isActive?: boolean;
+  disabled?: boolean;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => unknown;
 }
 
-const IconToggler = ({children, isActive, onClick}: IconTogglerProps) => {
+const IconToggler = ({children, isActive, disabled, onClick}: IconTogglerProps) => {
 
   const appliedClass = clsx(style['icon-toggler'], {[style['icon-toggler-active']]: isActive });
 
@@ -17,7 +18,7 @@ const IconToggler = ({children, isActive, onClick}: IconTogglerProps) => {
     onClick(event);
   }
   return (
-    <button onClick={handleButtonClick} className={appliedClass}>
+    <button disabled={disabled} onClick={handleButtonClick} className={appliedClass}>
       {children}
     </button>
   )

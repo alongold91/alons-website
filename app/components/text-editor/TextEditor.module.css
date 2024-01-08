@@ -1,3 +1,7 @@
+.button-container {
+  display: flex; 
+  margin-top: var(--spacing-medium);
+}
 .code {
   background-color: #343434;
   border-radius: 0.25em;
@@ -5,4 +9,20 @@
   color: #ffffff;
   font-size: 0.9rem;
   padding: 0.25em;
+}
+
+.button-container svg {
+  font-size: var(--spacing-large);
+  line-height: 1;
+}
+
+.bullet-list {
+  list-style-type: disc;
+}
+
+.tiptap > * + * {
+  margin-top: 0.75em;
+}
+.tiptap ul, .tiptap ol {
+  padding: 0 1rem;
 }
