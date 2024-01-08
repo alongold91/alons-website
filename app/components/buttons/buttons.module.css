@@ -1,0 +1,12 @@
+
+.icon-toggler {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    background-color: var(--color-backgroundSecondary-opaque);
+    border: 1px solid var(--color-backgroundSecondary);
+}
+
+.icon-toggler-active {
+    background-color: pink;
+}

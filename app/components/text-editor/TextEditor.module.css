@@ -1,0 +1,8 @@
+.code {
+  background-color: #343434;
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  color: #3ea9f0;
+  font-size: 0.9rem;
+  padding: 0.25em;
+}
