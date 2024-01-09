@@ -20,7 +20,7 @@ import Image from '@tiptap/extension-image';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useCallback } from 'react';
-import IconToggler from '../buttons/IconToggler';
+import IconToggler from '../../buttons/IconToggler';
 import style from './TextEditor.module.css';
 
 const Tiptap = () => {

@@ -1,29 +1,39 @@
+'use client';
 import Link from 'next/link';
 import style from './Navbar.module.css';
+import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
+
+const links = [
+  { name: 'Home', href: '/' },
+  {name: 'Blog', href: '/blog' },
+  { name: 'Tutorials', href: '/tutorials' },
+  { name: 'Portfolio Projects', href: '/portfolio-projects' },
+  { name: 'Digital Paintings', href: '/digital-paintings' },
+  { name: 'Contact Me', href: '/contact-me' }
+];
 
 const Navbar = () => {
+  const pathname = usePathname();
   return (
     <header>
       <nav className={style.nav}>
         <ul className={style.ul}>
-          <li>
-            <Link href='google.com'>Home</Link>
-          </li>
-          <li>
-            <Link href='google.com'>Blog</Link>
-          </li>
-          <li>
-            <Link href='google.com'>Tutorials</Link>
-          </li>
-          <li>
-            <Link href='google.com'>Portfolio Projects</Link>
-          </li>
-          <li>
-            <Link href='google.com'>Digital Paintings</Link>
-          </li>
-          <li>
-            <Link href='google.com'>Contact Me</Link>
-          </li>
+          {links.map((link) => {
+            return (
+              <li key={`li-${link.name}`}>
+                <Link
+                  key={`link-${link.name}`}
+                  href={link.href}
+                  className={clsx({
+                    [style['active-link']]: pathname === link.href
+                  })}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <p>Search bar</p>
       </nav>

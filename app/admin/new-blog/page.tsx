@@ -1,4 +1,4 @@
-import TextEditor from '@/app/components/text-editor/TextEditor'
+import TextEditor from '@/app/components/blog/text-editor/TextEditor'
 import React from 'react'
 
 const page = () => {
