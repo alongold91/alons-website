@@ -12,6 +12,10 @@ import {
 } from '@/public/icons';
 import Highlight from '@tiptap/extension-highlight';
 import Underline from '@tiptap/extension-underline';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 import Image from '@tiptap/extension-image';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -31,7 +35,7 @@ const Tiptap = () => {
         codeBlock: {
           HTMLAttributes: {
             class: style.code
-          },
+          }
         },
         bulletList: {
           HTMLAttributes: {
@@ -42,9 +46,14 @@ const Tiptap = () => {
       Highlight,
       Image,
       Underline,
+      Table.configure({
+        resizable: true
+      }),
+      TableRow,
+      TableHeader,
+      TableCell
     ]
     // onUpdate: (e) => console.log(editor?.getJSON())
-    // content: '<p>Hello World! 🌎️</p>',
   });
 
   const addImage = useCallback(() => {
@@ -55,12 +64,33 @@ const Tiptap = () => {
     }
   }, [editor]);
 
+  const createTable = useCallback(() => {
+    const isNumber = (str: string): boolean => {
+      return !isNaN(Number(str));
+    };
+
+    const rows = window.prompt('How many rows?');
+    const cols = window.prompt('How many columns?');
+
+    if (rows && isNumber(rows) && cols && isNumber(cols)) {
+      editor!
+        .chain()
+        .focus()
+        .insertTable({
+          rows: Number(rows),
+          cols: Number(cols),
+          withHeaderRow: true
+        })
+        .run();
+    }
+  }, [editor]);
+
   if (!editor) {
     return null;
   }
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <div className={style['button-container']}>
         <IconToggler onClick={addImage}>
           <ImageIcon />
@@ -85,7 +115,7 @@ const Tiptap = () => {
           isActive={editor.isActive('bold')}
           onClick={() => editor.chain().focus().toggleBold().run()}
         >
-          <BoldIcon  />
+          <BoldIcon />
         </IconToggler>
         <IconToggler
           isActive={editor.isActive('italic')}
@@ -118,14 +148,64 @@ const Tiptap = () => {
           <BulletlistIcon />
         </IconToggler>
         <IconToggler
-          isActive={false}
           disabled={!editor.can().liftListItem('listItem')}
           onClick={() => editor.chain().focus().liftListItem('listItem').run()}
         >
-          Lift li
+          Lift LI
         </IconToggler>
-
       </div>
+      <div className={style['button-container']}>
+        <IconToggler
+          onClick={createTable}
+        >
+          Insert Table
+        </IconToggler>
+        <IconToggler
+          onClick={() => editor.chain().focus().addColumnBefore().run()}
+        >
+          Add Column Before
+        </IconToggler>
+        <IconToggler
+          onClick={() => editor.chain().focus().addColumnAfter().run()}
+        >
+          Add Column After
+        </IconToggler>
+        <IconToggler
+          onClick={() => editor.chain().focus().deleteColumn().run()}
+        >
+          Delete Column
+        </IconToggler>
+      </div>
+      <div className={style['button-container']}>
+        <IconToggler
+          onClick={() => editor.chain().focus().addRowBefore().run()}
+        >
+          Add Row Before
+        </IconToggler>
+        <IconToggler onClick={() => editor.chain().focus().addRowAfter().run()}>
+          Add Row After
+        </IconToggler>
+        <IconToggler onClick={() => editor.chain().focus().deleteRow().run()}>
+          Delete Row
+        </IconToggler>
+      </div>
+      <div className={style['button-container']}>
+        <IconToggler onClick={() => editor.chain().focus().deleteRow().run()}>
+          Delete Table
+        </IconToggler>
+        <IconToggler onClick={() => editor.chain().focus().mergeCells().run()}>
+          Merge Cells
+        </IconToggler>
+        <IconToggler onClick={() => editor.chain().focus().splitCell().run()}>
+          Split Cell
+        </IconToggler>
+        <IconToggler
+          onClick={() => editor.chain().focus().toggleHeaderCell().run()}
+        >
+          Toggle Header Cell
+        </IconToggler>
+      </div>
+
       <EditorContent editor={editor} />
     </div>
   );

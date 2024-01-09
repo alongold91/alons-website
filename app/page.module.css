@@ -15,5 +15,5 @@
 .body-default-style {
   background-color: var(--color-backgroundPrimary);
   color: var(--color-textPrimary);
-  fontSize: var(--fonts-medium);
+  font-size: var(--fonts-medium);
 }

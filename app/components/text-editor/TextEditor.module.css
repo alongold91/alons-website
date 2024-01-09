@@ -1,6 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-medium);
+}
 .button-container {
   display: flex; 
-  margin-top: var(--spacing-medium);
+  /* margin-top: var(--spacing-medium); */
 }
 .code {
   background-color: #343434;
@@ -31,3 +36,48 @@
 .tiptap ul, .tiptap ol {
   padding: 0 1rem;
 }
+
+.tiptap table {
+	 border-collapse: collapse;
+	 margin: 0;
+	 overflow: hidden;
+	 table-layout: fixed;
+	 width: 100%;
+}
+ .tiptap table td, .tiptap table th {
+	 border: 2px solid #ced4da;
+	 box-sizing: border-box;
+	 min-width: 1em;
+	 padding: 3px 5px;
+	 position: relative;
+	 vertical-align: top;
+}
+ .tiptap table td > *, .tiptap table th > * {
+	 margin-bottom: 0;
+}
+ .tiptap table th {
+	 background-color: #f1f3f5;
+	 font-weight: bold;
+	 text-align: left;
+}
+ .tiptap table .column-resize-handle {
+	 background-color: #adf;
+	 bottom: -2px;
+	 position: absolute;
+	 right: -2px;
+	 pointer-events: none;
+	 top: 0;
+	 width: 4px;
+}
+ .tiptap table p {
+	 margin: 0;
+}
+ .tableWrapper {
+	 padding: 1rem 0;
+	 overflow-x: auto;
+}
+ .resize-cursor {
+	 cursor: ew-resize;
+	 cursor: col-resize;
+}
+ 
