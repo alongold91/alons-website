@@ -17,5 +17,5 @@
   }
 
   .active-link {
-    color: var(--color-backgroundSecondary);
+    color: var(--color-textDark);
   }
