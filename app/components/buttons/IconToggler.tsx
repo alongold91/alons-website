@@ -17,7 +17,7 @@ const IconToggler = ({children, isActive, disabled, onClick}: IconTogglerProps) 
     onClick(event);
   }
   return (
-    <button disabled={disabled} onClick={handleButtonClick} className={appliedClass}>
+    <button type='button' disabled={disabled} onClick={handleButtonClick} className={appliedClass}>
       {children}
     </button>
   )
