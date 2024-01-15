@@ -3,7 +3,7 @@ export interface Post {
     headline: string;
     description: string | null;
     content: string;
-    imagePath: string;
+    imagePath?: string;
     categories: string[];
     publishmentDate: number;
     lastEdited: number | null;

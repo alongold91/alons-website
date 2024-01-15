@@ -3,7 +3,7 @@ export interface FetchPostsResult {
   headline: string;
   description: string | null;
   content: string;
-  image_path: string;
+  image_path?: string;
   categories: string[];
   publishment_date: string;
   last_edited: string | null;

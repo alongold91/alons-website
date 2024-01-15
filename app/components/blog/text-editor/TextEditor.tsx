@@ -23,7 +23,12 @@ import { useCallback } from 'react';
 import IconToggler from '../../buttons/IconToggler';
 import style from './TextEditor.module.css';
 
-const Tiptap = () => {
+interface TextEditorProps {
+  name: string;
+  onChange: (text: string) => void;
+}
+
+const TextEditor = ({name, onChange}: TextEditorProps) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -52,7 +57,11 @@ const Tiptap = () => {
       TableRow,
       TableHeader,
       TableCell
-    ]
+    ],
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML();
+      onChange(html);
+    },
     // onUpdate: (e) => console.log(editor?.getJSON())
   });
 
@@ -206,9 +215,9 @@ const Tiptap = () => {
         </IconToggler>
       </div>
 
-      <EditorContent editor={editor} />
+      <EditorContent name={name} editor={editor} />
     </div>
   );
 };
 
-export default Tiptap;
+export default TextEditor;

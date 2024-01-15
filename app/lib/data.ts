@@ -1,10 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { Comment, Post } from './definitions';
-import { unstable_noStore as noStore } from 'next/cache';
 import { FetchCommentsResult, FetchPostsResult } from './results';
 
 export const fetchPosts = async () => {
-  noStore();
   try {
     const data = await sql<FetchPostsResult>`SELECT * FROM posts`;
     const posts: Post[] = data.rows.map((post) => ({
@@ -26,7 +24,6 @@ export const fetchPosts = async () => {
 };
 
 export const fetchComments = async () => {
-  noStore();
   try {
     const data = await sql<FetchCommentsResult>`SELECT * FROM comments`;
     const comments: Comment[] = data.rows.map((comment) => ({
